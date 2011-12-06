@@ -1,6 +1,6 @@
 Work in progress of a Parallel Map Reduce framework a la Hadoop.
 
-This is for learning purposes.
+This is for learning purposes. 
 
 I'm not introducing the concepts of readers
 
@@ -9,6 +9,8 @@ The map function gets an argument and does all the processing and looping. It sh
 That will get distributed and grouped in the reducers.
 
 The reducer function should get call with a key and a list of values (reduce "" []) and it should return a {key value}
+
+REDUCERS DOES NOT RUN IN PARALLEL YET
 
 
 This is in core.clj
