@@ -1,0 +1,28 @@
+Work in progress of a Parallel Map Reduce framework a la Hadoop.
+
+This is for learning purposes.
+
+I'm not introducing the concepts of readers
+
+The map function gets an argument and does all the processing and looping. It should return a lists of maps ({key,value},...)
+
+That will get distributed and grouped in the reducers.
+
+The reducer function should get call with a key and a list of values (reduce "" []) and it should return a {key value}
+
+
+This is in core.clj
+
+; Returns a list of {key value}.
+(defn mapper-split-words-text [text] 
+	(let [c (tokenize-str (.toLowerCase text))]
+		(map #(hash-map % 1) c)))
+		
+(defn mapper-split-words-file [file]
+	(mapper-split-words-text (slurp file)))
+
+; Returns a {key value} 
+(defn reducer-count-words [k values]
+	(hash-map k (reduce + values)))
+	
+(dist-map-reduce mapper-split-words-file reducer-count-words ["/Users/fddayan/.bash_profile","/Users/fddayan/.profile"])
